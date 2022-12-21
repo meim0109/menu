@@ -83,6 +83,15 @@ def webhook():
         keyword =  req.get("queryResult").get("parameters").get("any")
         info = "您要查詢減肥菜單的" + cond + "，時段是：" + keyword + "\n\n"
 
+    if (action == "menuChoice"):
+        rate =  req.get("queryResult").get("parameters").get("time")
+        info = "您今天選擇減肥菜單的天數：" + time
+
+    elif (action == "menuDetail"): 
+        cond =  req.get("queryResult").get("parameters").get("FilmQ")
+        keyword =  req.get("queryResult").get("parameters").get("any")
+        info = "您要查詢減肥菜單的" + cond + "，天數是：" + keyword + "\n\n"
+
 
     return make_response(jsonify({"fulfillmentText": info}))
 
