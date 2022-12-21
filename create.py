@@ -106,6 +106,22 @@ docs = [
 {  
   "date":"day5 ",
   "time":"午餐 ",
+  "Staple Food":"藜麥穀物碗100g",
+  "Nonstaple Food":"蔬菜、豆腐100g",
+  "beverage":"優酪乳200ml",
+  "fruit":"今天沒水果",
+},
+{  
+  "date":"day6 ",
+  "time":"午餐 ",
+  "Staple Food":"馬鈴薯100g",
+  "Nonstaple Food":"一塊牛排",
+  "beverage":"優落乳搭配奇亞籽200ml",
+  "fruit":"今天沒水果",
+},
+{  
+  "date":"day7 ",
+  "time":"午餐 ",
   "Staple Food":"紫米飯100g",
   "Nonstaple Food":"滷牛肉150g+燙青菜1份＋滷五香豆干1塊",
   "beverage":"芝麻糊100g",
@@ -157,6 +173,14 @@ docs = [
   "Staple Food":"芋頭粥100g",
   "Nonstaple Food":"大雜燴(花椰菜100g+豆腐半塊+番茄半個+香菇兩個)",
   "beverage":"綜合果汁",
+  "fruit":"晚餐沒水果!",
+},
+{  
+  "date":"day7 ",
+  "time":"晚餐 ",
+  "Staple Food":"義大利麵200g",
+  "Nonstaple Food":"花椰菜100g+青椒20g+紅蘿蔔50g",
+  "beverage":"分解茶200g",
   "fruit":"晚餐沒水果!",
 },
 ]
