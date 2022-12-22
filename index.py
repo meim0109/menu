@@ -84,7 +84,8 @@ def webhook():
             menu = "晚餐"
 
         info = "您要查詢減肥菜單的時段：" + menu + "，相關資料：\n"
-
+        
+        db = firestore.client()
         collection_ref = db.collection("減肥菜單")
         docs = collection_ref.get()
         result = ""
@@ -93,7 +94,7 @@ def webhook():
             if menu in dict["menu"]:
                 result += "時段:"+ dict["time"]+"\n"
                 result += "天數:"+ dict["date"]+"\n\n"
-                
+
         info += result
 
     return make_response(jsonify({"fulfillmentText": info}))
