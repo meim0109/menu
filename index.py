@@ -76,6 +76,7 @@ def webhook():
     if (action == "menuChoice"):
         menu =  req.get("queryResult").get("parameters").get("menu")
         info = "您今天選擇的時段是:" + menu
+        
     return make_response(jsonify({"fulfillmentText": info}))
 
 if __name__ == "__main__":
