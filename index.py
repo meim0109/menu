@@ -76,7 +76,7 @@ def webhook():
 
     if (action == "menuChoice"):
         menu =  req.get("queryResult").get("parameters").get("menu")
-        #info = "您今天選擇的時段是:" + menu
+        info = "您今天選擇的時段是:" + menu
         if (menu == "早餐"):
             menu = "早餐)"
         elif (menu == "午餐"):
