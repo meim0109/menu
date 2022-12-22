@@ -112,8 +112,8 @@ def webhook():
                     info += "飲品：" + dict["beverage"] + "\n" 
                     info += "水果：" + dict["fruit"] + "\n\n"
 
-                if not found:
-                    info += "很抱歉，目前無符合這個關鍵字的相關資訊喔"
+            if not found:
+                info += "很抱歉，目前無符合這個關鍵字的相關菜單喔"
 
 
     return make_response(jsonify({"fulfillmentText": info}))
