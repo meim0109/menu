@@ -99,7 +99,7 @@ def webhook():
     elif (action == "menuDetail"): 
          cond =  req.get("queryResult").get("parameters").get("FilmQ")
          keyword =  req.get("queryResult").get("parameters").get("any")
-         info = "您要查詢減肥菜單的" + cond + "，時段是：" + keyword + "\n\n"
+         info = "您要查詢減肥菜單的" + cond + "，"+ cond +"是：" + keyword + "\n\n"
 
 
 
