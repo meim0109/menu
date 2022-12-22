@@ -77,27 +77,9 @@ def webhook():
 
     if (action == "menuChoice"):
        rate =  req.get("queryResult").get("parameters").get("menu")
-       #info = "您今天選擇的時段是:" + menu
+       info = "您今天選擇的時段是:" + menu
 
-        if (menu == "早餐"):
-            menu = "早餐)"
-        elif (menu == "午餐"):
-            menu = "午餐"
-        info = "您要查詢減肥菜單的：" + menu + "，相關時段：\n"
-
-        collection_ref = db.collection("減肥菜單")
-        docs = collection_ref.get()
-        result = ""
-        for doc in docs:
-            dict = doc.to_dict()
-            if aond in dict["date"] and cond in dict["time"]:
-                result += "您實施減肥菜單的天數："+ dict["date"] +"您今天選擇的時段是:"+ dict["time"] + "主食:"+ dict["Staple Food"] 
-                result += "副餐:" + dict["Nonstaple Food"]+ "飲品:" + dict["beverage"] + "水果or點心:"+ dict["fruit"]+ "<br>"
-
-        info += result
-
-    elif (action == "menuDetail"): 
-         cond =  req.get("queryResult").get("parameters").get("FilmQ")
+    elif cond =  req.get("queryResult").get("parameters").get("FilmQ")
          keyword =  req.get("queryResult").get("parameters").get("any")
          info = "您要查詢減肥菜單的" + cond + "，"+ cond +"是：" + keyword + "\n\n"
 
