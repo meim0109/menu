@@ -83,7 +83,7 @@ def webhook():
     #   keyword =  req.get("queryResult").get("parameters").get("any")
     #   info = "您要查詢減肥菜單的" + cond + "，時段是：" + keyword + "\n\n"
 
-    if (action == "menuChoice"):
+    elif (action == "menuChoice"):
        rate =  req.get("queryResult").get("parameters").get("time")
        info = "您今天選擇減肥菜單的天數：" + time
 
