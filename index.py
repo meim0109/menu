@@ -40,10 +40,6 @@ def account():
 @app.route("/search", methods=["GET", "POST"])
 def search():
     if request.method == "POST":
-        aond = request.form["date"]
-        result = "請輸入您實施減肥菜單的天數：" + aond
-
-    if request.method == "POST":
         cond = request.form["time"]
         result = "請輸入您減肥菜單需要的時段：" + cond
 
@@ -53,7 +49,7 @@ def search():
         result = ""
         for doc in docs:
             dict = doc.to_dict()
-            if aond in dict["date"] and cond in dict["time"]:
+            if cond in dict["time"]:
                 result += "您實施減肥菜單的天數："+ dict["date"] +"您今天選擇的時段是:"+ dict["time"] + "主食:"+ dict["Staple Food"] 
                 result += "副餐:" + dict["Nonstaple Food"]+ "飲品:" + dict["beverage"] + "水果or點心:"+ dict["fruit"]+ "<br>"
             
@@ -84,7 +80,7 @@ def webhook():
             menu = "晚餐"
 
         info = "您要查詢減肥菜單的時段：" + menu + "，相關資料：\n"
-        
+
         db = firestore.client()
         collection_ref = db.collection("減肥菜單")
         docs = collection_ref.get()
