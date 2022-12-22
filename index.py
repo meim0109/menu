@@ -91,8 +91,12 @@ def webhook():
                 result += "時段:"+ dict["time"]+"\n"
                 result += "天數:"+ dict["date"]+"\n\n"
 
-        info += result
-
+    info += result
+        elif (action == "menuDetail"):  
+        cond =  req.get("queryResult").get("parameters").get("FilmQ")
+        keyword =  req.get("queryResult").get("parameters").get("any")
+        info = "您要查詢減肥菜單" + cond + "，關鍵字是：" + keyword + "\n\n"
+        
     return make_response(jsonify({"fulfillmentText": info}))
 
 if __name__ == "__main__":
