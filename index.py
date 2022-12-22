@@ -56,7 +56,7 @@ def search():
             if aond in dict["date"] and cond in dict["time"]:
                 result += "您實施減肥菜單的天數："+ dict["date"] +"您今天選擇的時段是:"+ dict["time"] + "主食:"+ dict["Staple Food"] 
                 result += "副餐:" + dict["Nonstaple Food"]+ "飲品:" + dict["beverage"] + "水果or點心:"+ dict["fruit"]+ "<br>"
-        
+            
         if result == "":
             result = "抱歉，查無相關條件的瘦身菜單"
 
@@ -75,22 +75,22 @@ def webhook():
     #info = "動作：" + action + "； 查詢內容：" + msg
     #info = "動作：" + action + "； 查詢內容：" + msg
     if (action == "menuChoice"):
-        rate =  req.get("queryResult").get("parameters").get("menu")
-        info = "您今天選擇的時段是:" + menu
+       rate =  req.get("queryResult").get("parameters").get("menu")
+       info = "您今天選擇的時段是:" + menu
 
-       (action == "menuDetail"): 
-        cond =  req.get("queryResult").get("parameters").get("FilmQ")
-        keyword =  req.get("queryResult").get("parameters").get("any")
-        info = "您要查詢減肥菜單的" + cond + "，時段是：" + keyword + "\n\n"
+    #  (action == "menuDetail"): 
+    #   cond =  req.get("queryResult").get("parameters").get("FilmQ")
+    #   keyword =  req.get("queryResult").get("parameters").get("any")
+    #   info = "您要查詢減肥菜單的" + cond + "，時段是：" + keyword + "\n\n"
 
-    elif (action == "menuChoice"):
-        rate =  req.get("queryResult").get("parameters").get("time")
-        info = "您今天選擇減肥菜單的天數：" + time
+    if (action == "menuChoice"):
+       rate =  req.get("queryResult").get("parameters").get("time")
+       info = "您今天選擇減肥菜單的天數：" + time
 
-        (action == "menuDetail"): 
-        aond =  req.get("queryResult").get("parameters").get("FilmQ")
-        zeyword =  req.get("queryResult").get("parameters").get("any")
-        info = "您要查詢減肥菜單的" + aond + "，天數是：" + zeyword + "\n\n"
+    #   (action == "menuDetail"): 
+    #     aond =  req.get("queryResult").get("parameters").get("FilmQ")
+    #     zeyword =  req.get("queryResult").get("parameters").get("any")
+    #     info = "您要查詢減肥菜單的" + aond + "，天數是：" + zeyword + "\n\n"
 
 
     return make_response(jsonify({"fulfillmentText": info}))
