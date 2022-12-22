@@ -79,7 +79,8 @@ def webhook():
        rate =  req.get("queryResult").get("parameters").get("menu")
        info = "您今天選擇的時段是:" + menu
 
-    elif cond =  req.get("queryResult").get("parameters").get("FilmQ")
+    elif (action == "menuDetail"):  
+         cond =  req.get("queryResult").get("parameters").get("FilmQ")
          keyword =  req.get("queryResult").get("parameters").get("any")
          info = "您要查詢減肥菜單的" + cond + "，"+"關鍵字是：" + keyword + "\n\n"
 
