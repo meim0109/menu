@@ -90,52 +90,12 @@ def webhook():
         result = ""
         for doc in docs:
             dict = doc.to_dict()
-            if cond in dict["time"]:
-                result += "時段:"+ dict["time"]+"/n/n"
+            if menu in dict["menu"]:
+                result += "時段:"+ dict["time"]+"/n"
+                result += "天數:"+ dict["date"]+"/n/n"
         info += result
 
-    elif (action == "menuDetail"):  
-        cond =  req.get("queryResult").get("parameters").get("FilmQ")
-        keyword =  req.get("queryResult").get("parameters").get("any")
-        info = "您要查詢減肥菜單" + cond + "，關鍵字是：" + keyword + "\n\n"
-
-        if (cond == "時段"):
-            collection_ref = db.collection("減肥菜單")
-            docs = collection_ref.get()
-            found = False
-            for doc in docs:
-                dict = doc.to_dict()
-                if keyword in dict["time"]:
-                    found = True 
-                    info += "時段：" + dict["time"] + "\n"
-                    info += "天數：" + dict["date"] + "\n"
-                    info += "主食：" + dict["Staple Food"] + "\n"
-                    info += "配餐：" + dict["Nonstaple Food"] + "\n"
-                    info += "飲品：" + dict["beverage"] + "\n" 
-                    info += "水果：" + dict["fruit"] + "\n\n"
-
-                if not found:
-                    info += "很抱歉，目前無符合這個關鍵字的相關資訊喔"
-            return make_response(jsonify({"fulfillmentText": info}))
-
-        elif (cond == "天數"):
-            collection_ref = db.collection("減肥菜單")
-            docs = collection_ref.get()
-            found = False
-            for doc in docs:
-                dict = doc.to_dict()
-                if keyword in dict["date"]:
-                    found = True 
-                    info += "時段：" + dict["time"] + "\n"
-                    info += "天數：" + dict["date"] + "\n"
-                    info += "主食：" + dict["Staple Food"] + "\n"
-                    info += "配餐：" + dict["Nonstaple Food"] + "\n"
-                    info += "飲品：" + dict["beverage"] + "\n" 
-                    info += "水果：" + dict["fruit"] + "\n\n"
-
-                if not found:
-                    info += "很抱歉，目前無符合這個關鍵字的相關資訊喔"
-
+    
 
     return make_response(jsonify({"fulfillmentText": info}))
 
