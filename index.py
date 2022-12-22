@@ -71,9 +71,11 @@ def webhook():
     req = request.get_json(force=True)
     # fetch queryResult from json
     action =  req.get("queryResult").get("action")
-    msg =  req.get("queryResult").get("queryText")
-    info = "動作：" + action + "； 查詢內容：" + msg
-
+    #msg =  req.get("queryResult").get("queryText")
+    #info = "動作：" + action + "； 查詢內容：" + msg
+    if (action == "menuChoice"):
+        menu =  req.get("queryResult").get("parameters").get("menu")
+        info = "您今天選擇的時段是:" + menu
     return make_response(jsonify({"fulfillmentText": info}))
 
 if __name__ == "__main__":
