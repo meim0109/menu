@@ -74,11 +74,17 @@ def webhook():
     #msg =  req.get("queryResult").get("queryText")
     #info = "動作：" + action + "； 查詢內容：" + msg
     #info = "動作：" + action + "； 查詢內容：" + msg
+
     if (action == "menuChoice"):
        rate =  req.get("queryResult").get("parameters").get("menu")
-       info = "您今天選擇的時段是:" + menu
+       #info = "您今天選擇的時段是:" + menu
 
-       db = firestore.client()
+        if (menu == "早餐"):
+            menu = "早餐)"
+        elif (menu == "午餐"):
+            menu = "午餐"
+        info = "您要查詢減肥菜單的：" + menu + "，相關時段：\n"
+
         collection_ref = db.collection("減肥菜單")
         docs = collection_ref.get()
         result = ""
@@ -90,18 +96,23 @@ def webhook():
 
         info += result
 
-       elif (action == "menuDetail"): 
-            cond =  req.get("queryResult").get("parameters").get("FilmQ")
-            keyword =  req.get("queryResult").get("parameters").get("any")
-            info = "您要查詢減肥菜單的" + cond + "，時段是：" + keyword + "\n\n"
+    elif (action == "menuDetail"): 
+         cond =  req.get("queryResult").get("parameters").get("FilmQ")
+         keyword =  req.get("queryResult").get("parameters").get("any")
+         info = "您要查詢減肥菜單的" + cond + "，時段是：" + keyword + "\n\n"
 
 
 
     if (action == "menuChoice"):
        rate =  req.get("queryResult").get("parameters").get("time")
-       info = "您今天選擇減肥菜單的天數：" + time
+       #info = "您今天選擇減肥菜單的天數：" + time
 
-       db = firestore.client()
+        if (time == "第一天"):
+            time = "day1)"
+        elif (time == "第二天"):
+            time = "day2"
+        info = "您要查詢減肥菜單的：" + time + "，相關時段：\n"
+
         collection_ref = db.collection("減肥菜單")
         docs = collection_ref.get()
         result = ""
