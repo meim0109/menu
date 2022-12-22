@@ -77,7 +77,24 @@ def webhook():
     if (action == "menuChoice"):
         menu =  req.get("queryResult").get("parameters").get("menu")
         info = "您今天選擇的時段是:" + menu
+        
+        if (menu == "早餐"):
+            menu = "早餐)"
+        elif (menu == "午餐"):
+            menu = "午餐"
+        elif (menu == "晚餐"):
+            menu = "晚餐"
+        info = "您要查詢減肥菜單的時段：" + menu + "，相關時段：\n"
 
+        collection_ref = db.collection("減肥菜單")
+        docs = collection_ref.get()
+        result = ""
+        for doc in docs:
+            dict = doc.to_dict()
+            if menu in dict["menu"]:
+                result += "時段:"+ dict["time"]+"/n"
+                result += "天數:"+ dict["date"]+"/n/n"
+        info += result
     return make_response(jsonify({"fulfillmentText": info}))
 
 if __name__ == "__main__":
