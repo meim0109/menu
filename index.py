@@ -79,12 +79,12 @@ def webhook():
         #info = "您今天選擇的時段是:" + menu
 
         if (menu == "早餐"):
-            menu = "早餐)"
+            menu = "早餐"
         elif (menu == "午餐"):
             menu = "午餐"
         elif (menu == "晚餐"):
             menu = "晚餐"
-        info = "您要查詢減肥菜單的時段：" + menu + "，相關時段：\n"
+        info = "您要查詢減肥菜單的時段：" + menu + "，相關資料：\n"
 
         collection_ref = db.collection("減肥菜單")
         docs = collection_ref.get()
