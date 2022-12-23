@@ -1,17 +1,5 @@
 import requests
 from bs4 import BeautifulSoup
-
-
-#from flask import Flask, render_template, request, abort, jsonify
-#from datetime import datetime, timezone, timedelta
-
-#import firebase_admin
-#from firebase_admin import credentials, firestore
-#cred = credentials.Certificate("serviceAccountKey.json")
-#firebase_admin.initialize_app(cred)
-#db = firestore.client()
-#app = Flask(__name__)
-
 from flask import Flask, render_template, request,make_response, jsonify
 import firebase_admin
 from firebase_admin import credentials, firestore
@@ -92,12 +80,33 @@ def webhook():
                 result += "天數:"+ dict["date"]+"\n\n"
 
         info += result
+
     elif (action == "menuDetail"):  
         cond =  req.get("queryResult").get("parameters").get("FilmQ")
         keyword =  req.get("queryResult").get("parameters").get("any")
         info = "您要查詢減肥菜單" + cond + "，關鍵字是：" + keyword + "\n\n"
 
         if (cond == "時段"):
+            collection_ref = db.collection("減肥菜單")
+            docs = collection_ref.get()
+            found = False
+            for doc in docs:
+                dict = doc.to_dict()
+                if keyword in dict["time"]:
+                    found = True 
+                    info += "時段：" + dict["time"] + "\n"
+                    info += "天數：" + dict["date"] + "\n"
+                    info += "主食：" + dict["Staple Food"] + "\n"
+                    info += "配餐：" + dict["Nonstaple Food"] + "\n"
+                    info += "飲品：" + dict["beverage"] + "\n" 
+                    info += "水果：" + dict["fruit"] + "\n\n"
+
+            if not found:
+                info += "很抱歉，目前無符合這個關鍵字的相關菜單喔"
+
+
+
+        elif (cond == "天數"):
             collection_ref = db.collection("減肥菜單")
             docs = collection_ref.get()
             found = False
