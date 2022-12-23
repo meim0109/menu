@@ -1,5 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
+
 from flask import Flask, render_template, request,make_response, jsonify
 import firebase_admin
 from firebase_admin import credentials, firestore
@@ -55,11 +56,14 @@ def webhook():
     req = request.get_json(force=True)
     # fetch queryResult from json
     action =  req.get("queryResult").get("action")
-    msg =  req.get("queryResult").get("queryText")
-    info = "動作：" + action + "； 查詢內容：" + msg
+    #msg =  req.get("queryResult").get("queryText")
+    #info = "動作：" + action + "； 查詢內容：" + msg
+    if (action == "menuChoice"):
+        menu =  req.get("queryResult").get("parameters").get("menu")
 
-
-
+        info = "您要查詢減肥菜單的時段：" + menu + 
+  
+   
     return make_response(jsonify({"fulfillmentText": info}))
 
 if __name__ == "__main__":
