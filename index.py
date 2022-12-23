@@ -63,9 +63,7 @@ def webhook():
         menu =  req.get("queryResult").get("parameters").get("menu")
         time =  req.get("queryResult").get("parameters").get("time")
 
-        if (action == menu):
-            if (action == time)
-            info = "您要查詢減肥菜單的時段：" + menu +"且您要查詢減肥菜單的天數：" + time + "，相關資料：\n"
+        info = "您要查詢減肥菜單的時段：" + menu +"且您要查詢減肥菜單的天數：" + time + "，相關資料：\n"
 
         collection_ref = db.collection("減肥菜單")
         docs = collection_ref.get()
