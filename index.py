@@ -70,9 +70,12 @@ def webhook():
         for doc in docs:
             dict = doc.to_dict()
             if menu in dict["time"]:
-                result += "時段:"+ dict["time"]+"\n"
-                result += "天數:"+ dict["date"]+"\n\n"
-
+                    info += "時段：" + dict["time"] + "\n"
+                    info += "天數：" + dict["date"] + "\n"
+                    info += "主食：" + dict["Staple Food"] + "\n"
+                    info += "配餐：" + dict["Nonstaple Food"] + "\n"
+                    info += "飲品：" + dict["beverage"] + "\n" 
+                    info += "水果：" + dict["fruit"] + "\n\n"
         info += result
     return make_response(jsonify({"fulfillmentText": info}))
 
