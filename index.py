@@ -69,7 +69,7 @@ def webhook():
         result = ""
         for doc in docs:
             dict = doc.to_dict()
-            if menu in dict["menu"]:
+            if menu in dict["time"]:
                 result += "時段:"+ dict["time"]+"\n"
                 result += "天數:"+ dict["date"]+"\n\n"
 
