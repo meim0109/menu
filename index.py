@@ -61,11 +61,11 @@ def webhook():
     if (action == "menuChoice"):
         menu =  req.get("queryResult").get("parameters").get("menu")
 
-        if (menu == "早上"):
+        if (menu == "早餐"):
             menu = "早餐"
-        elif (menu == "中午"):
+        elif (menu == "中餐"):
             menu = "午餐"
-        elif (menu == "晚上"):
+        elif (menu == "晚餐"):
             menu = "晚餐"
 
         info = "您要查詢減肥菜單的時段：" + menu + "，相關資料：\n"
@@ -81,8 +81,6 @@ def webhook():
 
         info += result
 
-  
-   
     return make_response(jsonify({"fulfillmentText": info}))
 
 if __name__ == "__main__":
