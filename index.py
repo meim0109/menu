@@ -63,7 +63,7 @@ def webhook():
         menu =  req.get("queryResult").get("parameters").get("menu")
         time =  req.get("queryResult").get("parameters").get("time")
 
-        info = "您要查詢減肥菜單的時段：" + menu +"且您要查詢減肥菜單的天數：" + time + "，相關資料：\n" 
+        info = "您要查詢減肥菜單的時段：" + menu +"且您要查詢減肥菜單的天數：" + time + "，相關資料：\n"
 
         collection_ref = db.collection("減肥菜單")
         docs = collection_ref.get()
@@ -71,12 +71,12 @@ def webhook():
         for doc in docs:
             dict = doc.to_dict()
             if menu in dict["time"] && time in dict["date"]:
-                    info += "時段：" + dict["time"] + "\n\n" 
-                    info += "天數：" + dict["date"] + "\n\n" 
-                    info += "主食：" + dict["Staple Food"] + "\n\n"  
-                    info += "配餐：" + dict["Nonstaple Food"] + "\n\n" 
-                    info += "飲品：" + dict["beverage"] + "\n\n" 
-                    info += "水果：" + dict["fruit"] + "\n\n"   
+                    info += "時段：" + dict["time"] + "\n"
+                    info += "天數：" + dict["date"] + "\n"
+                    info += "主食：" + dict["Staple Food"] + "\n"
+                    info += "配餐：" + dict["Nonstaple Food"] + "\n"
+                    info += "飲品：" + dict["beverage"] + "\n" 
+                    info += "水果：" + dict["fruit"] + "\n\n"
     
         info += result
     return make_response(jsonify({"fulfillmentText": info}))
