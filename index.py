@@ -61,8 +61,12 @@ def webhook():
     #info = "動作：" + action + "； 查詢內容：" + msg
     if (action == "menuChoice"):
         menu =  req.get("queryResult").get("parameters").get("menu")
+        time =  req.get("queryResult").get("parameters").get("time")
 
-        info = "您要查詢減肥菜單的時段：" + menu + "，相關資料：\n"
+        if (action == menu):
+            info = "您要查詢減肥菜單的時段：" + menu + "，相關資料：\n"
+        elif(action == time):
+            info = "您要查詢減肥菜單的時間：" + time + "，相關資料：\n"
 
         collection_ref = db.collection("減肥菜單")
         docs = collection_ref.get()
@@ -70,6 +74,7 @@ def webhook():
         for doc in docs:
             dict = doc.to_dict()
             if menu in dict["time"]:
+                if time in dict["date"]:
                     info += "時段：" + dict["time"] + "\n"
                     info += "天數：" + dict["date"] + "\n"
                     info += "主食：" + dict["Staple Food"] + "\n"
