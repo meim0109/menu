@@ -27,29 +27,29 @@ def account():
     else:
         return render_template("account.html")
 
-@app.route("/search", methods=["GET", "POST"])
-def search():
-     if request.method == "POST":
-         cond = request.form["time"]
-         result = "請輸入您減肥菜單需要的時段：" + cond
+# @app.route("/search", methods=["GET", "POST"])
+# def search():
+#      if request.method == "POST":
+#          cond = request.form["time"]
+#          result = "請輸入您減肥菜單需要的時段：" + cond
 
-         db = firestore.client()
-         collection_ref = db.collection("減肥菜單")
-         docs = collection_ref.get()
-         result = ""
-         for doc in docs:
-             dict = doc.to_dict()
-             if cond in dict["time"]:
-                 result += "您實施減肥菜單的天數："+ dict["date"] +"您今天選擇的時段是:"+ dict["time"] + "主食:"+ dict["Staple Food"] 
-                 result += "副餐:" + dict["Nonstaple Food"]+ "飲品:" + dict["beverage"] + "水果or點心:"+ dict["fruit"]+ "<br>"
+#          db = firestore.client()
+#          collection_ref = db.collection("減肥菜單")
+#          docs = collection_ref.get()
+#          result = ""
+#          for doc in docs:
+#              dict = doc.to_dict()
+#              if cond in dict["time"]:
+#                  result += "您實施減肥菜單的天數："+ dict["date"] +"您今天選擇的時段是:"+ dict["time"] + "主食:"+ dict["Staple Food"] 
+#                  result += "副餐:" + dict["Nonstaple Food"]+ "飲品:" + dict["beverage"] + "水果or點心:"+ dict["fruit"]+ "<br>"
             
-         if result == "":
-             result = "抱歉，查無相關條件的瘦身菜單"
+#          if result == "":
+#              result = "抱歉，查無相關條件的瘦身菜單"
 
-         return result
+#          return result
            
-     else:
-         return render_template("search.html")
+#      else:
+#          return render_template("search.html")
 
 @app.route("/webhook", methods=["POST"])
 def webhook():
@@ -70,14 +70,13 @@ def webhook():
         result = ""
         for doc in docs:
             dict = doc.to_dict()
-            if menu in dict["time"] && time in dict["date"]:
+            if menu in dict["time"] and time in dict["date"]:
                     info += "時段：" + dict["time"] + "\n"
                     info += "天數：" + dict["date"] + "\n"
                     info += "主食：" + dict["Staple Food"] + "\n"
                     info += "配餐：" + dict["Nonstaple Food"] + "\n"
                     info += "飲品：" + dict["beverage"] + "\n" 
                     info += "水果：" + dict["fruit"] + "\n\n"
-    
         info += result
     return make_response(jsonify({"fulfillmentText": info}))
 
