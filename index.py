@@ -64,9 +64,8 @@ def webhook():
         time =  req.get("queryResult").get("parameters").get("time")
 
         if (action == menu):
-            info = "您要查詢減肥菜單的時段：" + menu + "，相關資料：\n"
-        elif(action == time):
-            info = "您要查詢減肥菜單的時間：" + time + "，相關資料：\n"
+            if (action == time)
+            info = "您要查詢減肥菜單的時段：" + menu +"且您要查詢減肥菜單的天數：" + time + "，相關資料：\n"
 
         collection_ref = db.collection("減肥菜單")
         docs = collection_ref.get()
@@ -81,8 +80,7 @@ def webhook():
                     info += "配餐：" + dict["Nonstaple Food"] + "\n"
                     info += "飲品：" + dict["beverage"] + "\n" 
                     info += "水果：" + dict["fruit"] + "\n\n"
-            elif 
-                info += "很抱歉，目前無符合這個關鍵字的相關菜單喔"
+    
         info += result
     return make_response(jsonify({"fulfillmentText": info}))
 
