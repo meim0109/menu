@@ -62,8 +62,7 @@ def webhook():
         menu =  req.get("queryResult").get("parameters").get("menu")
 
         info = "您要查詢減肥菜單的時段：" + menu + "，相關資料：\n"
-        
-        db = firestore.client()
+
         collection_ref = db.collection("減肥菜單")
         docs = collection_ref.get()
         result = ""
