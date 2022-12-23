@@ -67,14 +67,15 @@ def webhook():
         collection_ref = db.collection("減肥菜單")
         docs = collection_ref.get()
         result = ""
-
         for doc in docs:
             dict = doc.to_dict()
             if menu in dict["menu"]:
                 result += "時段:"+ dict["time"]+"\n"
                 result += "天數:"+ dict["date"]+"\n\n"
-  
+
+        info += result
     return make_response(jsonify({"fulfillmentText": info}))
+
 
 if __name__ == "__main__":
     app.run()
