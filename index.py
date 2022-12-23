@@ -55,74 +55,9 @@ def webhook():
     req = request.get_json(force=True)
     # fetch queryResult from json
     action =  req.get("queryResult").get("action")
-    #msg =  req.get("queryResult").get("queryText")
-    #info = "動作：" + action + "； 查詢內容：" + msg
-    if (action == "menuChoice"):
-        menu =  req.get("queryResult").get("parameters").get("menu")
+    msg =  req.get("queryResult").get("queryText")
+    info = "動作：" + action + "； 查詢內容：" + msg
 
-        if (menu == "早上"):
-            menu = "早餐"
-        elif (menu == "中午"):
-            menu = "午餐"
-        elif (menu == "晚上"):
-            menu = "晚餐"
-
-        info = "您要查詢減肥菜單的時段：" + menu + "，相關資料：\n"
-
-        db = firestore.client()
-        collection_ref = db.collection("減肥菜單")
-        docs = collection_ref.get()
-        result = ""
-        for doc in docs:
-            dict = doc.to_dict()
-            if menu in dict["menu"]:
-                result += "時段:"+ dict["time"]+"\n"
-                result += "天數:"+ dict["date"]+"\n\n"
-
-        info += result
-
-    elif (action == "menuDetail"):  
-        cond =  req.get("queryResult").get("parameters").get("FilmQ")
-        keyword =  req.get("queryResult").get("parameters").get("any")
-        info = "您要查詢減肥菜單" + cond + "，關鍵字是：" + keyword + "\n\n"
-
-        if (cond == "時段"):
-            collection_ref = db.collection("減肥菜單")
-            docs = collection_ref.get()
-            found = False
-            for doc in docs:
-                dict = doc.to_dict()
-                if keyword in dict["time"]:
-                    found = True 
-                    info += "時段：" + dict["time"] + "\n"
-                    info += "天數：" + dict["date"] + "\n"
-                    info += "主食：" + dict["Staple Food"] + "\n"
-                    info += "配餐：" + dict["Nonstaple Food"] + "\n"
-                    info += "飲品：" + dict["beverage"] + "\n" 
-                    info += "水果：" + dict["fruit"] + "\n\n"
-
-            if not found:
-                info += "很抱歉，目前無符合這個關鍵字的相關菜單喔"
-
-
-
-        elif (cond == "天數"):
-            collection_ref = db.collection("減肥菜單")
-            docs = collection_ref.get()
-            found = False
-            for doc in docs:
-                dict = doc.to_dict()
-                if keyword in dict["time"]:
-                    found = True 
-                    info += "時段：" + dict["time"] + "\n"
-                    info += "天數：" + dict["date"] + "\n"
-                    info += "主食：" + dict["Staple Food"] + "\n"
-                    info += "配餐：" + dict["Nonstaple Food"] + "\n"
-                    info += "飲品：" + dict["beverage"] + "\n" 
-                    info += "水果：" + dict["fruit"] + "\n\n"
-
-            if not found:
-                info += "很抱歉，目前無符合這個關鍵字的相關菜單喔"
 
 
     return make_response(jsonify({"fulfillmentText": info}))
