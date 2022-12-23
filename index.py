@@ -62,6 +62,7 @@ def webhook():
         menu =  req.get("queryResult").get("parameters").get("menu")
 
         info = "您要查詢減肥菜單的時段：" + menu + "，相關資料：\n"
+        
     return make_response(jsonify({"fulfillmentText": info}))
 
 if __name__ == "__main__":
