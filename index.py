@@ -57,27 +57,27 @@ def webhook():
     req = request.get_json(force=True)
     # fetch queryResult from json
     action =  req.get("queryResult").get("action")
-    #msg =  req.get("queryResult").get("queryText")
-    #info = "動作：" + action + "； 查詢內容：" + msg
-    if (action == "menuChoice"):
-        menu =  req.get("queryResult").get("parameters").get("menu")
-        time =  req.get("queryResult").get("parameters").get("time")
+    msg =  req.get("queryResult").get("queryText")
+    info = "動作：" + action + "； 查詢內容：" + msg
+    # if (action == "menuChoice"):
+    #     menu =  req.get("queryResult").get("parameters").get("menu")
+    #     time =  req.get("queryResult").get("parameters").get("time")
 
-        info = "您要查詢減肥菜單的時段：" + menu  +"且您要查詢減肥菜單的天數：" + time + "，相關資料：\n\n"
+    #     info = "您要查詢減肥菜單的時段：" + menu  +"且您要查詢減肥菜單的天數：" + time + "，相關資料：\n\n"
 
-         collection_ref = db.collection("減肥菜單")
-         docs = collection_ref.get()
-         result = ""
-         for doc in docs:
-             dict = doc.to_dict()
-             if menu in dict["time"] and time in dict["date"]:
-                     info += "時段：" + dict["time"] + "\n\n"
-                     info += "天數：" + dict["date"] + "\n\n"
-                     info += "主食：" + dict["Staple Food"] + "\n\n"
-                     info += "配餐：" + dict["Nonstaple Food"] + "\n\n"
-                     info += "飲品：" + dict["beverage"] + "\n\n" 
-                     info += "水果：" + dict["fruit"] + "\n\n"
-         info += result
+    #      collection_ref = db.collection("減肥菜單")
+    #      docs = collection_ref.get()
+    #      result = ""
+    #      for doc in docs:
+    #          dict = doc.to_dict()
+    #          if menu in dict["time"] and time in dict["date"]:
+    #                  info += "時段：" + dict["time"] + "\n\n"
+    #                  info += "天數：" + dict["date"] + "\n\n"
+    #                  info += "主食：" + dict["Staple Food"] + "\n\n"
+    #                  info += "配餐：" + dict["Nonstaple Food"] + "\n\n"
+    #                  info += "飲品：" + dict["beverage"] + "\n\n" 
+    #                  info += "水果：" + dict["fruit"] + "\n\n"
+    #      info += result
     return make_response(jsonify({"fulfillmentText": info}))
 
 
